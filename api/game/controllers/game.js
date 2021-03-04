@@ -5,4 +5,16 @@
  * to customize this controller
  */
 
-module.exports = {};
+module.exports = {
+  populate: async (ctx) => {
+    const options = {
+      sort: "popularity",
+      page: "1",
+      ...ctx.query,
+    };
+
+    await strapi.services.game.populate(options);
+
+    ctx.send("Finished populating!");
+  }
+};
